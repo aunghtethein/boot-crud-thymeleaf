@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout :: layout (~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <main role="main">
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-12">
+                            <h4>USERS</h4>
+                        </div>
+                    </div>
+
+                <div class="col-md-12" th:if="${users.isEmpty()}">
+                    <div class="alert alert-warning" role="alert">
+                        No user defined yet!
+                    </div>
+                </div>
+
+
+               <div class="col-md-12" th:if="${not #lists.isEmpty(users)}">
+                    <table class="table table-striped" >
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+                                <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="#" th:href="@{/signup}">Add a New User</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+</body>
+</html>
